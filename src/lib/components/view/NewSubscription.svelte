@@ -30,6 +30,7 @@
 			"Please select a valid option",
 		),
 		purpose: z.string().nonempty("Please enter the purpose"),
+		startDate: z.coerce.date("Please fill the start date")
 	});
 
 	const { form, setFields, setTouched, errors, data, isSubmitting } =
@@ -42,6 +43,7 @@
 				purpose,
 				subscriberName: subName,
 				subscriptionName,
+				startDate
 			}) => {
 				let subscriberName = subName;
 				if (authState.user && authState.user?.role !== "admin") {
@@ -56,7 +58,8 @@
 							timestamp: new Date().toISOString(),
 							subscriptionNo: `SUB-${(sheetState.subscriptionSheet.length + 1).toString().padStart(4, "0")}`,
 							price: price.toString(),
-							companyName,
+							date: new Date(startDate).toISOString(),
+							companyName: companyName,
 							frequency,
 							purpose,
 							subscriberName,
@@ -170,7 +173,7 @@
 					</Tooltip.Root>
 				</div>
 			</div>
-			<div class="grid sm:grid-cols-2 gap-6">
+			<div class="grid sm:grid-cols-3 gap-6">
 				<div class="grid gap-2">
 					<Label for="price">Price (&#8377;)</Label>
 					<Tooltip.Root disabled={!$errors.price}>
@@ -214,6 +217,15 @@
 						</Select.Content>
 					</Select.Root>
 				</div>
+				<div class="grid gap-2">
+				<Label for="startDate">Start Date</Label>
+				<Tooltip.Root disabled={!$errors.startDate}>
+					<Tooltip.Trigger>
+						<Input name="startDate" id="startDate" type="date" />
+					</Tooltip.Trigger>
+					<Tooltip.Content>{$errors.startDate}</Tooltip.Content>
+				</Tooltip.Root>
+			</div>
 			</div>
 			<div class="grid gap-2">
 				<Label for="purpose">Purpose of Subscription</Label>

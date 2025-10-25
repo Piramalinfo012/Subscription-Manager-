@@ -63,6 +63,30 @@ export const subscriptionColumns: ColumnDef<SubscriptionData>[] = [
 		},
 	},
 	{
+		accessorKey: "startDate",
+		enableGlobalFilter: false,
+		header: ({ column }) =>
+			renderComponent(SortingButton, {
+				header: "Start Date",
+				onclick: column.getToggleSortingHandler(),
+			}),
+		cell: ({ row }) => {
+			const formatter = Intl.DateTimeFormat("en-IN", {
+				dateStyle: "medium",
+			});
+			const value = row.getValue("startDate") as Date;
+			const cellSnippet = createRawSnippet((getDate: () => string) => ({
+				render: () => `<p>${getDate()}</p>`,
+			}));
+			return renderSnippet(
+				cellSnippet,
+				isNaN(value.getTime())
+					? "Not Specified"
+					: formatter.format(row.getValue("startDate")),
+			);
+		},
+	},
+	{
 		accessorKey: "endDate",
 		enableGlobalFilter: false,
 		header: ({ column }) =>

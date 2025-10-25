@@ -17,6 +17,7 @@
 			subscriptionName: s.subscriptionName,
 			subscriptionNo: s.subscriptionNo,
 			status: getStatus(s),
+			startDate: new Date(s.date)
 		})) satisfies SubscriptionData[],
 	);
 </script>

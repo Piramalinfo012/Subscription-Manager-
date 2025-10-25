@@ -1,6 +1,7 @@
 export const subscriptionHeaders = [
 	"timestamp",
 	"subscriptionNo",
+	"date",
 	"companyName",
 	"subscriberName",
 	"subscriptionName",

@@ -27,7 +27,7 @@ type ParseData =
 	| Master;
 
 function parseSheet(sheet: Sheets, data: string[][]): ParseData {
-	const headerRow = sheet === "SUBSCRIPTION" ? 4 : 0;
+	const headerRow = sheet === "SUBSCRIPTION" ? 5 : 0;
 
 	const headers = data[headerRow].map(toCamelCase);
 

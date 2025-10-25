@@ -48,7 +48,7 @@ export default async function ({
 	if (!result.success) throw Error(result.message);
 
 	const data: string[][] = result.values;
-	const headerRow = sheet === "SUBSCRIPTION" ? 4 : 0;
+	const headerRow = sheet === "SUBSCRIPTION" ? 5 : 0;
 
 	const headers = data[headerRow].map(toCamelCase);
 
